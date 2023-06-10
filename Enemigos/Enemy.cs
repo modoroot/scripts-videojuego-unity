@@ -45,10 +45,10 @@ public class Enemy : Entity {
 
 
     public override void SlowEntityBy(float _slowPercentage, float _slowDuration) {
-        moveSpeed = moveSpeed * (1 - _slowPercentage);
+        moveSpeed *= (1 - _slowPercentage);
         anim.speed = anim.speed * (1 - _slowPercentage);
 
-        Invoke("ReturnDefaultSpeed", _slowDuration);
+        Invoke(nameof(ReturnDefaultSpeed), _slowDuration);
     }
 
     protected override void ReturnDefaultSpeed() {
@@ -99,7 +99,7 @@ public class Enemy : Entity {
     }
 
     public virtual void AnimationFinishTrigger() => stateMachine.CurrentState.AnimationFinishTrigger();
-
+    public virtual void AnimationSpecialAttackTrigger() { }
     public virtual RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDir, 50, whatIsPlayer);
     protected override void OnDrawGizmos() {
         base.OnDrawGizmos();

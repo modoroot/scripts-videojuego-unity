@@ -2,22 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonBattleState : EnemyState {
-    private Transform player;
-    private Enemy_Skeleton enemy;
+public class RogueBattleState : EnemyState {
     private int moveDir;
-
-
-    public SkeletonBattleState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolName, Enemy_Skeleton _enemy) : base(_enemyBase, _stateMachine, _animBoolName) {
+    private Transform player;
+    private Enemy_Rogue enemy;
+    private float defaultSpeed;
+    public RogueBattleState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolName, Enemy_Rogue _enemy) : base(_enemyBase, _stateMachine, _animBoolName) {
         this.enemy = _enemy;
     }
 
     public override void Enter() {
         base.Enter();
+        defaultSpeed = enemy.moveSpeed;
+        enemy.moveSpeed = enemy.battleStateMoveSpeed;
 
         player = PlayerManager.instance.player.transform;
-        if(player.GetComponent<PlayerStats>().IsDead)
-            stateMachine.ChangeState(enemy.MoveState);
+        if (player.GetComponent<PlayerStats>().IsDead)
+            enemy.stats.KillEntity();
     }
 
     public override void Update() {
@@ -26,10 +27,9 @@ public class SkeletonBattleState : EnemyState {
         if (enemy.IsPlayerDetected()) {
             stateTimer = enemy.battleTime;
 
-            if (enemy.IsPlayerDetected().distance < enemy.attackDistance) {
-                if (CanAttack())
-                    stateMachine.ChangeState(enemy.AttackState);
-            }
+            if (enemy.IsPlayerDetected().distance < enemy.attackDistance)
+                stateMachine.ChangeState(enemy.DeadState);
+
         } else {
             if (stateTimer < 0 || Vector2.Distance(player.transform.position, enemy.transform.position) > 7)
                 stateMachine.ChangeState(enemy.IdleState);
@@ -45,6 +45,7 @@ public class SkeletonBattleState : EnemyState {
 
     public override void Exit() {
         base.Exit();
+        enemy.moveSpeed = defaultSpeed;
     }
 
     private bool CanAttack() {

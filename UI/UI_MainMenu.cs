@@ -19,7 +19,6 @@ public class UI_MainMenu : MonoBehaviour {
     public void ContinueGame() {
         StartCoroutine(LoadSceneFadeEffect(1.5f));
     }
-
     public void LoadGame() {
 
     }
@@ -30,8 +29,7 @@ public class UI_MainMenu : MonoBehaviour {
     }
 
     public void ExitGame() {
-        Debug.Log("Sale del juego");
-        //Application.Quit();
+        Application.Quit();
     }
 
     IEnumerator LoadSceneFadeEffect(float _delay) {
