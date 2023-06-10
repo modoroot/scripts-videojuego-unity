@@ -8,12 +8,9 @@ public class PlayerDashState : PlayerState {
 
     public override void Enter() {
         base.Enter();
-
         player.Skill.Dash.CloneOnDash();
-
         stateTimer = player.dashDuration;
-
-
+        player.stats.MakeInvulnerable(true);
     }
 
     public override void Exit() {
@@ -21,6 +18,7 @@ public class PlayerDashState : PlayerState {
 
         player.Skill.Dash.CloneOnArrival();
         player.SetVelocity(0, rb.velocity.y);
+        player.stats.MakeInvulnerable(false);
     }
 
     public override void Update() {

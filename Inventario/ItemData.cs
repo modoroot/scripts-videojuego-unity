@@ -1,12 +1,14 @@
 using System.Text;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public enum ItemType {
     Material,
     Equipment
 }
-
 
 [CreateAssetMenu(fileName = "New Item Data", menuName = "Data/Item")]
 public class ItemData : ScriptableObject {
@@ -34,6 +36,6 @@ public class ItemData : ScriptableObject {
         string path = AssetDatabase.GetAssetPath(this);
         // Convierte la ruta del archivo en un identificador único global (GUID)
         itemId = AssetDatabase.AssetPathToGUID(path);
-#endif // Fin de la directiva de preprocesador
+#endif
     }
 }

@@ -84,12 +84,8 @@ public class Sword_Skill_Controller : MonoBehaviour {
 
     public void ReturnSword() {
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        //rb.isKinematic = false;
         transform.parent = null;
         isReturning = true;
-
-
-        // sword.skill.setcooldown;
     }
 
     private void Update() {
@@ -117,15 +113,10 @@ public class Sword_Skill_Controller : MonoBehaviour {
             if (wasStopped) {
                 spinTimer -= Time.deltaTime;
 
-
-                //transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + 1 , transform.position.y), 2.4f * Time.deltaTime);
-
                 if (spinTimer < 0) {
                     isReturning = true;
                     isSpinning = false;
                 }
-
-
                 hitTimer -= Time.deltaTime;
 
                 if (hitTimer < 0) {
@@ -230,7 +221,6 @@ public class Sword_Skill_Controller : MonoBehaviour {
             StopWhenSpinning();
             return;
         }
-
 
         canRotate = false;
         cd.enabled = false;

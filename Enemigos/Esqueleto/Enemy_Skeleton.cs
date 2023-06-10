@@ -9,7 +9,6 @@ public class Enemy_Skeleton : Enemy {
     public SkeletonMoveState MoveState { get; private set; }
     public SkeletonBattleState BattleState { get; private set; }
     public SkeletonAttackState AttackState { get; private set; }
-
     public SkeletonStunnedState StunnedState { get; private set; }
     public SkeletonDeadState DeadState { get; private set; }
     #endregion
@@ -32,10 +31,6 @@ public class Enemy_Skeleton : Enemy {
 
     protected override void Update() {
         base.Update();
-
-        if (Input.GetKeyDown(KeyCode.U)) {
-            stateMachine.ChangeState(StunnedState);
-        }
 
     }
 

@@ -83,13 +83,11 @@ public class Player : Entity {
 
 
     protected override void Update() {
+        if (Time.timeScale == 0)
+            return;
         base.Update();
-
         StateMachine.CurrentState.Update();
-
         CheckForDashInput();
-
-
         if (Input.GetKeyDown(KeyCode.F) && Skill.Crystal.crystalUnlocked)
             Skill.Crystal.CanUseSkill();
 
@@ -146,7 +144,7 @@ public class Player : Entity {
             DashDir = Input.GetAxisRaw("Horizontal");
 
             if (DashDir == 0)
-                DashDir = facingDir;
+                DashDir = FacingDir;
 
 
             StateMachine.ChangeState(DashState);

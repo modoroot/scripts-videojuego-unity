@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Accessibility;
 
-public class Entity : MonoBehaviour
-{
+
+public class Entity : MonoBehaviour {
 
     #region Components
     public Animator anim { get; private set; }
@@ -12,7 +10,7 @@ public class Entity : MonoBehaviour
     public EntityFX fx { get; private set; }
     public SpriteRenderer sr { get; private set; }
     public CharacterStats stats { get; private set; }
-    public CapsuleCollider2D cd {  get; private set; }
+    public CapsuleCollider2D cd { get; private set; }
     #endregion
 
     [Header("Knockback info")]
@@ -28,19 +26,17 @@ public class Entity : MonoBehaviour
     [SerializeField] protected Transform wallCheck;
     [SerializeField] protected float wallCheckDistance;
     [SerializeField] protected LayerMask whatIsGround;
-
-    public int facingDir { get; private set; } = 1;
+    public int KnockbackDir { get; private set; }
+    public int FacingDir { get; private set; } = 1;
     protected bool facingRight = true;
 
     public System.Action onFlipped;
 
-    protected virtual void Awake()
-    {
+    protected virtual void Awake() {
 
     }
 
-    protected virtual void Start()
-    {
+    protected virtual void Start() {
         sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -49,44 +45,44 @@ public class Entity : MonoBehaviour
         cd = GetComponent<CapsuleCollider2D>();
     }
 
-    protected virtual void Update()
-    {
+    protected virtual void Update() {
 
     }
 
-    public virtual void SlowEntityBy(float _slowPercentage, float _slowDuration)
-    {
-        
+    public virtual void SlowEntityBy(float _slowPercentage, float _slowDuration) {
+
     }
 
-    protected virtual void ReturnDefaultSpeed()
-    {
+    protected virtual void ReturnDefaultSpeed() {
         anim.speed = 1;
     }
 
-    public virtual void DamageImpact() => StartCoroutine("HitKnockback");
- 
-    protected virtual IEnumerator HitKnockback()
-    {
+    public virtual void DamageImpact() => StartCoroutine(nameof(HitKnockback));
+    public virtual void SetupKnockbackDirection(Transform _damageDirection) {
+        if (_damageDirection.position.x > transform.position.x)
+            KnockbackDir = -1;
+        else if(_damageDirection.position.x < transform.position.x)
+            KnockbackDir = 1;
+    }
+
+    protected virtual IEnumerator HitKnockback() {
         isKnocked = true;
 
-        rb.velocity = new Vector2(knockbackDirection.x * -facingDir, knockbackDirection.y);
+        rb.velocity = new Vector2(knockbackDirection.x * KnockbackDir, knockbackDirection.y);
 
         yield return new WaitForSeconds(knockbackDuration);
         isKnocked = false;
     }
 
     #region Velocity
-    public void SetZeroVelocity()
-    {
+    public void SetZeroVelocity() {
         if (isKnocked)
             return;
 
         rb.velocity = new Vector2(0, 0);
     }
 
-    public void SetVelocity(float _xVelocity, float _yVelocity)
-    {
+    public void SetVelocity(float _xVelocity, float _yVelocity) {
         if (isKnocked)
             return;
 
@@ -96,28 +92,25 @@ public class Entity : MonoBehaviour
     #endregion
     #region Collision
     public virtual bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
-    public virtual bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
+    public virtual bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDir, wallCheckDistance, whatIsGround);
 
-    protected virtual void OnDrawGizmos()
-    {
+    protected virtual void OnDrawGizmos() {
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
         Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
     }
     #endregion
     #region Flip
-    public virtual void Flip()
-    {
-        facingDir = facingDir * -1;
+    public virtual void Flip() {
+        FacingDir = FacingDir * -1;
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
 
-        if(onFlipped != null)
+        if (onFlipped != null)
             onFlipped();
     }
 
-    public virtual void FlipController(float _x)
-    {
+    public virtual void FlipController(float _x) {
         if (_x > 0 && !facingRight)
             Flip();
         else if (_x < 0 && facingRight)
@@ -125,10 +118,9 @@ public class Entity : MonoBehaviour
     }
     #endregion
 
-    
 
-    public virtual void Die()
-    {
+
+    public virtual void Die() {
 
     }
 }

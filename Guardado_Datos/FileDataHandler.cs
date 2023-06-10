@@ -20,7 +20,8 @@ public class FileDataHandler {
     // Indica si los datos se deben encriptar
     private bool encryptData = false;
     // Palabra clave para encriptar los datos
-    private string codeWord = "bloodbornepc"; 
+    private string codeWord = "bloodbornepc";
+
 
     /// <summary>
     /// Constructor de la clase
@@ -52,19 +53,57 @@ public class FileDataHandler {
                 }
             }
 
-
         } catch (Exception e) {
             Debug.Log("Error al guardar datos: " + fullPath + "\n" + e);
         }
     }
 
+    /// <summary>
+    /// Método que guarda los datos del jugador en la nube
+    /// </summary>
+    /// <param name="_data">json</param>
     public async Task SaveUnityCloudService(GameData _data) {
         await UnityServices.InitializeAsync();
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
-        var data = new Dictionary<string, object> { { "key", _data } };
+
+        if (!AuthenticationService.Instance.IsSignedIn)
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+
+        string playerId = AuthenticationService.Instance.PlayerId;
+        // Obtiene el número de secuencia único para el nuevo guardado
+        int saveNumber = await GetNextSaveNumber(playerId);
+        string saveKey = playerId + "_" + saveNumber;
+        // Utiliza la clave del guardado para guardar los datos en la nube
+        var data = new Dictionary<string, object> { { saveKey, _data } };
         await CloudSaveService.Instance.Data.ForceSaveAsync(data);
     }
 
+    /// <summary>
+    /// Método que obtiene el último número de guardado, le suma 1 y lo devuelve
+    /// </summary>
+    /// <param name="playerId">id del jugador dentro de Unity Cloud</param>
+    /// <returns>número de guardado</returns>
+    private async Task<int> GetNextSaveNumber(string playerId) {
+        // Obtiene los datos guardados en la nube
+        var cloudData = await CloudSaveService.Instance.Data.LoadAsync();
+        int saveNumber = 1;
+        foreach (var item in cloudData) {
+            // Verifica si la clave del elemento comienza con el id del jugador
+            if (item.Key.StartsWith(playerId + "_")) {
+                // Obtiene el número de secuencia del guardado existente
+                int itemSaveNumber = int.Parse(item.Key.Split('_')[1]);
+                if (itemSaveNumber >= saveNumber) {
+                    // Actualiza el número de secuencia si hace falta
+                    saveNumber = itemSaveNumber + 1;
+                }
+            }
+        }
+        return saveNumber;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public GameData Load() {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
         GameData loadData = null;
@@ -88,13 +127,20 @@ public class FileDataHandler {
         return loadData;
     }
 
-
+    /// <summary>
+    /// 
+    /// </summary>
     public void DeleteData() {
         string fullPath = Path.Combine(dataDirPath, dataFileName);
         if (File.Exists(fullPath))
             File.Delete(fullPath);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_data"></param>
+    /// <returns></returns>
     private string EncryptDecrypt(string _data) {
         string modifiedData = "";
         for (int i = 0; i < _data.Length; i++) {

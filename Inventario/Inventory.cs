@@ -32,6 +32,7 @@ public class Inventory : MonoBehaviour, ISaveManager {
     private float armorCooldown;
 
     [Header("Datos")]
+    public List<ItemData> items;
     public List<InventoryItem> loadedItems;
     public List<ItemData_Equipment> loadedEquipment;
 
@@ -276,7 +277,7 @@ public class Inventory : MonoBehaviour, ISaveManager {
 
     public void LoadData(GameData _data) {
         foreach (KeyValuePair<string, int> pair in _data.inventory) {
-            foreach (var item in GetItemDatabase()) {
+            foreach (var item in items) {
                 if (item != null && item.itemId == pair.Key) {
                     InventoryItem itemToLoad = new InventoryItem(item);
                     itemToLoad.stackSize = pair.Value;
@@ -286,7 +287,7 @@ public class Inventory : MonoBehaviour, ISaveManager {
         }
 
         foreach (string loadedItemId in _data.equipmentId) {
-            foreach (var item in GetItemDatabase()) {
+            foreach (var item in items) {
                 if (item != null && loadedItemId == item.itemId) {
                     loadedEquipment.Add(item as ItemData_Equipment);
                 }
@@ -310,6 +311,9 @@ public class Inventory : MonoBehaviour, ISaveManager {
         }
     }
 
+#if UNITY_EDITOR
+    [ContextMenu("Llenar slots items")]
+    private void FillUpItems() => items = new List<ItemData>(GetItemDatabase());
     private List<ItemData> GetItemDatabase() {
         List<ItemData> itemDatabase = new List<ItemData>();
         string[] assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Items" });
@@ -320,5 +324,5 @@ public class Inventory : MonoBehaviour, ISaveManager {
         }
         return itemDatabase;
     }
-
+#endif
 }

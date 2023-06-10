@@ -17,7 +17,6 @@ public class SkeletonBattleState : EnemyState {
 
         player = PlayerManager.instance.player.transform;
 
-
     }
 
     public override void Update() {

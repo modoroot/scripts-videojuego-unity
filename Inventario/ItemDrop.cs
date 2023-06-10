@@ -15,12 +15,15 @@ public class ItemDrop : MonoBehaviour {
                 dropList.Add(possibleDrop[i]);
         }
 
-
         for (int i = 0; i < possibleItemDrop; i++) {
-            ItemData randomItem = dropList[Random.Range(0, dropList.Count - 1)];
+            // Verifica si la lista tiene al menos un elemento
+            if (dropList.Count > 0) {
+                // Accede a un índice aleatorio de la lista
+                ItemData randomItem = dropList[Random.Range(0, dropList.Count)];
 
-            dropList.Remove(randomItem);
-            DropItem(randomItem);
+                dropList.Remove(randomItem);
+                DropItem(randomItem);
+            }
         }
     }
 

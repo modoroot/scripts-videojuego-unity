@@ -65,6 +65,7 @@ public class CharacterStats : MonoBehaviour {
 
     public System.Action onHealthChanged;
     public bool IsDead { get; private set; }
+    public bool IsInvulnerable { get; private set; }
     private bool isVulnerable;
 
     protected virtual void Start() {
@@ -122,17 +123,13 @@ public class CharacterStats : MonoBehaviour {
     public virtual void DoDamage(CharacterStats _targetStats) {
         if (TargetCanAvoidAttack(_targetStats))
             return;
-
+        _targetStats.GetComponent<Entity>().SetupKnockbackDirection(transform);
         int totalDamage = damage.GetValue() + strength.GetValue();
-
         if (CanCrit()) {
             totalDamage = CalculateCriticalDamage(totalDamage);
         }
-
         totalDamage = CheckTargetArmor(_targetStats, totalDamage);
         _targetStats.TakeDamage(totalDamage);
-
-
         DoMagicalDamage(_targetStats); // Borrar esto si no se quiere que el primer ataque haga daño mágico
 
     }
@@ -156,11 +153,11 @@ public class CharacterStats : MonoBehaviour {
             return;
 
 
-        AttemptyToApplyAilements(_targetStats, _fireDamage, _iceDamage, _lightingDamage);
+        AttemptToApplyAilments(_targetStats, _fireDamage, _iceDamage, _lightingDamage);
 
     }
 
-    private void AttemptyToApplyAilements(CharacterStats _targetStats, int _fireDamage, int _iceDamage, int _lightingDamage) {
+    private void AttemptToApplyAilments(CharacterStats _targetStats, int _fireDamage, int _iceDamage, int _lightingDamage) {
         bool canApplyIgnite = _fireDamage > _iceDamage && _fireDamage > _lightingDamage;
         bool canApplyChill = _iceDamage > _fireDamage && _iceDamage > _lightingDamage;
         bool canApplyShock = _lightingDamage > _fireDamage && _lightingDamage > _iceDamage;
@@ -288,6 +285,8 @@ public class CharacterStats : MonoBehaviour {
     #endregion
 
     public virtual void TakeDamage(int _damage) {
+        if (IsInvulnerable)
+            return;
         DecreaseHealthBy(_damage);
 
         GetComponent<Entity>().DamageImpact();
@@ -406,4 +405,10 @@ public class CharacterStats : MonoBehaviour {
 
         return null;
     }
+    public void KillEntity() {
+        if (!IsDead)
+            Die();
+    }
+
+    public void MakeInvulnerable(bool _invulnerable) => IsInvulnerable = _invulnerable;
 }

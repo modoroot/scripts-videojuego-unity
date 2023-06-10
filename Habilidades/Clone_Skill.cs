@@ -92,7 +92,7 @@ public class Clone_Skill : Skill {
 
 
     public void CreateCloneWithDelay(Transform _enemyTransform) {
-        StartCoroutine(CloneDelayCorotine(_enemyTransform, new Vector3(2 * player.facingDir, 0)));
+        StartCoroutine(CloneDelayCorotine(_enemyTransform, new Vector3(2 * player.FacingDir, 0)));
     }
 
     private IEnumerator CloneDelayCorotine(Transform _trasnform, Vector3 _offset) {

@@ -9,7 +9,6 @@ public class InventoryItem {
         AddStack();
     }
 
-
     public void AddStack() => stackSize++;
     public void RemoveStack() => stackSize--;
 }

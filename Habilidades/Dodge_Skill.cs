@@ -40,6 +40,6 @@ public class Dodge_Skill : Skill {
 
     public void CreateMirageOnDodge() {
         if (dodgeMirageUnlocked)
-            SkillManager.instance.Clone.CreateClone(player.transform, new Vector3(2 * player.facingDir, 0));
+            SkillManager.instance.Clone.CreateClone(player.transform, new Vector3(2 * player.FacingDir, 0));
     }
 }

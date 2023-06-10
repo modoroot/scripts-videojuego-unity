@@ -21,6 +21,7 @@ public class UI : MonoBehaviour {
 
     private void Awake() {
         SwitchTo(skillTreeUI);
+        fadeScreen.gameObject.SetActive(true);
     }
 
     void Start() {
@@ -56,6 +57,13 @@ public class UI : MonoBehaviour {
 
         if (_menu != null)
             _menu.SetActive(true);
+
+        if (GameManager.instance != null) {
+            if (_menu == inGameUI)
+                GameManager.instance.PauseGame(false);
+            else
+                GameManager.instance.PauseGame(true);
+        }
     }
 
     public void SwitchWithKeyTo(GameObject _menu) {
@@ -70,14 +78,14 @@ public class UI : MonoBehaviour {
 
     private void CheckForInGameUI() {
         for (int i = 0; i < transform.childCount; i++) {
-            if (transform.GetChild(i).gameObject.activeSelf)
+            if (transform.GetChild(i).gameObject.activeSelf && transform.GetChild(i).GetComponent<UI_FadeScreen>() == null)
                 return;
         }
 
         SwitchTo(inGameUI);
     }
 
-    public void SwitchOnEndScreen() { 
+    public void SwitchOnEndScreen() {
         fadeScreen.FadeOut();
         StartCoroutine(EndScreenCoroutine());
     }
@@ -90,5 +98,8 @@ public class UI : MonoBehaviour {
     }
 
     public void RestartGameButton() => GameManager.instance.RestartScene();
-
+    public void ExitGame() {
+        //Debug.Log("Sale del juego");
+        Application.Quit();
+    }
 }

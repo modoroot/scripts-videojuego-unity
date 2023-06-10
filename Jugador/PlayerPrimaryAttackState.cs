@@ -24,7 +24,7 @@ public class PlayerPrimaryAttackState : PlayerState {
         player.anim.SetInteger("ComboCounter", ComboCounter);
 
 
-        float attackDir = player.facingDir;
+        float attackDir = player.FacingDir;
 
         if (xInput != 0)
             attackDir = xInput;
