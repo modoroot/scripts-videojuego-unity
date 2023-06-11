@@ -6,13 +6,11 @@ using UnityEngine.SceneManagement;
 public class UI_MainMenu : MonoBehaviour {
     [SerializeField] private string sceneName = "MainScene";
     [SerializeField] private GameObject continueButton;
-    [SerializeField] private GameObject loadGameButton;
     [SerializeField] UI_FadeScreen fadeScreen;
 
     private void Start() {
         if (SaveManager.instance.HasSaveData() == false) {
             continueButton.SetActive(false);
-            loadGameButton.SetActive(false);
         }
     }
 
