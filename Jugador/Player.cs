@@ -96,9 +96,9 @@ public class Player : Entity {
     }
 
     public override void SlowEntityBy(float _slowPercentage, float _slowDuration) {
-        moveSpeed = moveSpeed * (1 - _slowPercentage);
-        jumpForce = jumpForce * (1 - _slowPercentage);
-        dashSpeed = dashSpeed * (1 - _slowPercentage);
+        moveSpeed *= (1 - _slowPercentage);
+        jumpForce *= (1 - _slowPercentage);
+        dashSpeed *= (1 - _slowPercentage);
         anim.speed = anim.speed * (1 - _slowPercentage);
 
         Invoke(nameof(ReturnDefaultSpeed), _slowDuration);

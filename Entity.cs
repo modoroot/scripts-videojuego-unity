@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour {
 
-    #region Components
+    #region Componentes
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
     public EntityFX fx { get; private set; }
@@ -74,7 +74,7 @@ public class Entity : MonoBehaviour {
         isKnocked = false;
     }
 
-    #region Velocity
+    #region Velocidad
     public void SetZeroVelocity() {
         if (isKnocked)
             return;
@@ -90,7 +90,7 @@ public class Entity : MonoBehaviour {
         FlipController(_xVelocity);
     }
     #endregion
-    #region Collision
+    #region Colisiones
     public virtual bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
     public virtual bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDir, wallCheckDistance, whatIsGround);
 

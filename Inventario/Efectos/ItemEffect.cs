@@ -10,6 +10,5 @@ public class ItemEffect : ScriptableObject {
     public string effectDescription;
 
     public virtual void ExecuteEffect(Transform _enemyPosition) {
-        Debug.Log("Effect executed!");
     }
 }

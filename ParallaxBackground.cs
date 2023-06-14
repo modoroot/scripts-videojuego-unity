@@ -25,9 +25,9 @@ public class ParallaxBackground : MonoBehaviour {
 
 
         if (distanceMoved > xPosition + length)
-            xPosition = xPosition + length;
+            xPosition += length;
         else if (distanceMoved < xPosition - length)
-            xPosition = xPosition - length;
+            xPosition -= length;
 
     }
 }

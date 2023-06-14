@@ -21,7 +21,7 @@ public class RogueGroundedState : EnemyState {
     public override void Update() {
         base.Update();
 
-        if (enemy.IsPlayerDetected() || Vector2.Distance(enemy.transform.position, player.transform.position) < 5)
+        if (enemy.IsPlayerDetected() || Vector2.Distance(enemy.transform.position, player.transform.position) < 3)
             stateMachine.ChangeState(enemy.BattleState);
     }
 }

@@ -61,7 +61,7 @@ public class FileDataHandler {
     /// <summary>
     /// Método que guarda los datos del jugador en la nube
     /// </summary>
-    /// <param name="_data">json</param>
+    /// <param name="_data">objeto que contiene los datos de juego a guardar</param>
     public async Task SaveUnityCloudService(GameData _data) {
         await UnityServices.InitializeAsync();
 
@@ -137,10 +137,10 @@ public class FileDataHandler {
     }
 
     /// <summary>
-    /// 
+    /// Encripta y desencripta los datos utilizando una palabra clave
     /// </summary>
-    /// <param name="_data"></param>
-    /// <returns></returns>
+    /// <param name="_data">json encriptado/desencriptado</param>
+    /// <returns>json encriptado/desencriptado</returns>
     private string EncryptDecrypt(string _data) {
         string modifiedData = "";
         for (int i = 0; i < _data.Length; i++) {

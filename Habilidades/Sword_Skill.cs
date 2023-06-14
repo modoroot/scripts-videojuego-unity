@@ -60,12 +60,8 @@ public class Sword_Skill : Skill {
 
     protected override void Start() {
         base.Start();
-
         GenereateDots();
         SetupGraivty();
-
-
-
         swordUnlockButton.GetComponent<Button>().onClick.AddListener(UnlockSword);
         bounceUnlockButton.GetComponent<Button>().onClick.AddListener(UnlockBounceSword);
         pierceUnlockButton.GetComponent<Button>().onClick.AddListener(UnlockPierceSword);
@@ -87,7 +83,6 @@ public class Sword_Skill : Skill {
     protected override void Update() {
         if (Input.GetKeyUp(KeyCode.Mouse1))
             finalDir = new Vector2(AimDirection().normalized.x * launchForce.x, AimDirection().normalized.y * launchForce.y);
-
 
         if (Input.GetKey(KeyCode.Mouse1)) {
             for (int i = 0; i < dots.Length; i++) {
@@ -159,8 +154,6 @@ public class Sword_Skill : Skill {
         if (spinUnlockButton.unlocked)
             swordType = SwordType.Spin;
     }
-
-
 
     #endregion
     #region Aim region

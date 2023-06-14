@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 
+/// Clase que controla el comportamiento de las almas perdidas
 /// </summary>
 public class LostSoulsController : MonoBehaviour {
     public int souls;

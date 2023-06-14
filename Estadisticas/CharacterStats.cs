@@ -152,7 +152,6 @@ public class CharacterStats : MonoBehaviour {
         if (Mathf.Max(_fireDamage, _iceDamage, _lightingDamage) <= 0)
             return;
 
-
         AttemptToApplyAilments(_targetStats, _fireDamage, _iceDamage, _lightingDamage);
 
     }
@@ -326,7 +325,7 @@ public class CharacterStats : MonoBehaviour {
     }
 
 
-    #region Stat calculations
+    #region Cálculos stats
     protected int CheckTargetArmor(CharacterStats _targetStats, int totalDamage) {
         if (_targetStats.isChilled)
             totalDamage -= Mathf.RoundToInt(_targetStats.armor.GetValue() * .8f);

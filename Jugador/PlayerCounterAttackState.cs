@@ -30,10 +30,10 @@ public class PlayerCounterAttackState : PlayerState {
         foreach (var hit in colliders) {
             if (hit.GetComponent<Enemy>() != null) {
                 if (hit.GetComponent<Enemy>().CanBeStunned()) {
-                    stateTimer = 10; // any value bigger than 1
+                    stateTimer = 10;
                     player.anim.SetBool("SuccessfulCounterAttack", true);
 
-                    player.Skill.Parry.UseSkill(); // goint to use to restore health on parry
+                    player.Skill.Parry.UseSkill();
 
                     if (canCreateClone) {
                         canCreateClone = false;

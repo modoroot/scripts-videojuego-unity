@@ -9,7 +9,7 @@ public class Enemy_Rogue : Enemy {
     [SerializeField] private GameObject explosivePrefab;
     [SerializeField] private float growthSpeed;
     [SerializeField] private float maxSize;
-    #region States
+    #region Estados
     public RogueIdleState IdleState { get; private set; }
     public RogueMoveState MoveState { get; private set; }
     public RogueDeadState DeadState { get; private set; }
