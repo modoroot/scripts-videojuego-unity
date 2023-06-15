@@ -28,7 +28,6 @@ public class Clone_Skill : Skill {
     [SerializeField] private bool canDuplicateClone;
     [SerializeField] private float chanceToDuplicate;
     [SerializeField] private UI_SkillTreeSlot crystalUnlockButton;
-    public bool crystalInsteadClone;
 
 
     protected override void Start() {
@@ -36,7 +35,6 @@ public class Clone_Skill : Skill {
         cloneAttackUnlockButton.GetComponent<Button>().onClick.AddListener(UnlockCloneAttack);
         aggresiveCloneUnlockButton.GetComponent<Button>().onClick.AddListener(UnlockAggresiveClone);
         multipleUnlockButton.GetComponent<Button>().onClick.AddListener(UnlockMultiClone);
-        crystalUnlockButton.GetComponent<Button>().onClick.AddListener(UnlockCrystalInstead);
     }
 
     #region Unlock region
@@ -45,7 +43,6 @@ public class Clone_Skill : Skill {
         UnlockCloneAttack();
         UnlockAggresiveClone();
         UnlockMultiClone();
-        UnlockCrystalInstead();
     }
     private void UnlockCloneAttack() {
         if (cloneAttackUnlockButton.unlocked) {
@@ -67,22 +64,10 @@ public class Clone_Skill : Skill {
             attackMultiplier = multiCloneAttackMultiplier;
         }
     }
-
-    private void UnlockCrystalInstead() {
-        if (crystalUnlockButton.unlocked) {
-            crystalInsteadClone = true;
-        }
-    }
-
-
     #endregion
 
 
     public void CreateClone(Transform _clonePosition, Vector3 _offset) {
-        if (crystalInsteadClone) {
-            SkillManager.instance.Crystal.CreateCrystal();
-            return;
-        }
 
         GameObject newClone = Instantiate(clonePrefab);
 

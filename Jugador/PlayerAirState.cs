@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Estado que define el estado en el aire del jugador. Sus características son:
+/// Si detecta un muro a partir del WallCheck, cambia al estado WallSlide.
+/// Si detecta suelo, cambia al estado Idle.
+/// Si se presiona Space, se ajusta la velocidad del jugador del eje Y y del eje X.
+/// </summary>
 public class PlayerAirState : PlayerState {
     public PlayerAirState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName) {
     }

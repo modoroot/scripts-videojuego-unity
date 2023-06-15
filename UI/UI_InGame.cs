@@ -41,9 +41,6 @@ public class UI_InGame : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Q) && skills.Parry.parryUnlocked)
             SetCooldownOf(parryImage);
 
-        if (Input.GetKeyDown(KeyCode.F) && skills.Crystal.crystalUnlocked)
-            SetCooldownOf(crystalImage);
-
         if (Input.GetKeyDown(KeyCode.Mouse1) && skills.Sword.swordUnlocked)
             SetCooldownOf(swordImage);
 
@@ -55,7 +52,6 @@ public class UI_InGame : MonoBehaviour {
 
         CheckCooldownOf(dashImage, skills.Dash.cooldown);
         CheckCooldownOf(parryImage, skills.Parry.cooldown);
-        CheckCooldownOf(crystalImage, skills.Crystal.cooldown);
         CheckCooldownOf(swordImage, skills.Sword.cooldown);
         CheckCooldownOf(blackholeImage, skills.Blackhole.cooldown);
         CheckCooldownOf(flaskImage, Inventory.instance.FlaskCooldown);

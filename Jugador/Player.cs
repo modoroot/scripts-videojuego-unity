@@ -92,8 +92,6 @@ public class Player : Entity {
         base.Update();
         StateMachine.CurrentState.Update();
         CheckForDashInput();
-        if (Input.GetKeyDown(KeyCode.F) && Skill.Crystal.crystalUnlocked)
-            Skill.Crystal.CanUseSkill();
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
             Inventory.instance.UseFlask();

@@ -7,11 +7,10 @@ public class Blackhole_Skill : Skill {
 
 
     [SerializeField] private UI_SkillTreeSlot blackHoleUnlockButton;
-    public bool blackholeUnlocked;// { get; private set; }
+    public bool blackholeUnlocked;
     [SerializeField] private int amountOfAttacks;
     [SerializeField] private float cloneCooldown;
     [SerializeField] private float blackholeDuration;
-    [Space]
     [SerializeField] private GameObject blackHolePrefab;
     [SerializeField] private float maxSize;
     [SerializeField] private float growSpeed;

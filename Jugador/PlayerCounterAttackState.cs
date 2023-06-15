@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/// <summary>
+/// Estado del jugador que se activa cuando se realiza un contraataque. Sus características son:
+/// Entra en la animación de contraataque.
+/// Durante el periodo de tiempo que está en la animación, comprueba si hay enemigos en el área de ataque que
+/// estén atacando y que puedan ser aturdidos.
+/// </summary>
 public class PlayerCounterAttackState : PlayerState {
     private bool canCreateClone;
 

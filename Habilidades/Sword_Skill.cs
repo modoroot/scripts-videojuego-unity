@@ -19,7 +19,7 @@ public class Sword_Skill : Skill {
     [SerializeField] private float bounceGravity;
     [SerializeField] private float bounceSpeed;
 
-    [Header("Peirce info")]
+    [Header("Pierce info")]
     [SerializeField] private UI_SkillTreeSlot pierceUnlockButton;
     [SerializeField] private int pierceAmount;
     [SerializeField] private float pierceGravity;
@@ -45,8 +45,6 @@ public class Sword_Skill : Skill {
     public bool timeStopUnlocked { get; private set; }
     [SerializeField] private UI_SkillTreeSlot vulnerableUnlockButton;
     public bool vulnerableUnlocked { get; private set; }
-
-
 
     private Vector2 finalDir;
 
