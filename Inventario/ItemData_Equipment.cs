@@ -21,8 +21,6 @@ public class ItemData_Equipment : ItemData {
 
     [Header("Estadísticas principales")]
     public int strength;
-    public int agility;
-    public int intelligence;
     public int vitality;
 
     [Header("Estadísticas ofensivas")]
@@ -34,7 +32,6 @@ public class ItemData_Equipment : ItemData {
     public int health;
     public int armor;
     public int evasion;
-    public int magicResistance;
 
     [Header("Estadísticas mágicas")]
     public int fireDamage;
@@ -57,19 +54,12 @@ public class ItemData_Equipment : ItemData {
         PlayerStats playerStats = PlayerManager.instance.player.GetComponent<PlayerStats>();
 
         playerStats.strength.AddModifier(strength);
-        playerStats.agility.AddModifier(agility);
-        playerStats.intelligence.AddModifier(intelligence);
         playerStats.vitality.AddModifier(vitality);
-
         playerStats.damage.AddModifier(damage);
         playerStats.critChance.AddModifier(critChance);
         playerStats.critPower.AddModifier(critPower);
-
         playerStats.maxHealth.AddModifier(health);
         playerStats.armor.AddModifier(armor);
-        playerStats.evasion.AddModifier(evasion);
-        playerStats.magicResistance.AddModifier(magicResistance);
-
         playerStats.fireDamage.AddModifier(fireDamage);
         playerStats.iceDamage.AddModifier(iceDamage);
         playerStats.lightingDamage.AddModifier(lightingDamage);
@@ -79,8 +69,6 @@ public class ItemData_Equipment : ItemData {
         PlayerStats playerStats = PlayerManager.instance.player.GetComponent<PlayerStats>();
 
         playerStats.strength.RemoveModifier(strength);
-        playerStats.agility.RemoveModifier(agility);
-        playerStats.intelligence.RemoveModifier(intelligence);
         playerStats.vitality.RemoveModifier(vitality);
 
 
@@ -91,8 +79,6 @@ public class ItemData_Equipment : ItemData {
 
         playerStats.maxHealth.RemoveModifier(health);
         playerStats.armor.RemoveModifier(armor);
-        playerStats.evasion.RemoveModifier(evasion);
-        playerStats.magicResistance.RemoveModifier(magicResistance);
 
 
         playerStats.fireDamage.RemoveModifier(fireDamage);
@@ -103,21 +89,13 @@ public class ItemData_Equipment : ItemData {
     public override string GetDescription() {
         sb.Length = 0;
         descriptionLength = 0;
-
         AddItemDescription(strength, "Fuerza");
-        AddItemDescription(agility, "Agilidad");
-        AddItemDescription(intelligence, "Inteligencia");
         AddItemDescription(vitality, "Vitalidad");
-
         AddItemDescription(damage, "Daño");
         AddItemDescription(critChance, "Prob. crítico");
         AddItemDescription(critPower, "Daño crítico");
-
         AddItemDescription(health, "HP");
-        AddItemDescription(evasion, "Evasión");
         AddItemDescription(armor, "Armadura");
-        AddItemDescription(magicResistance, "Resis. mágica");
-
         AddItemDescription(fireDamage, "Daño ígneo");
         AddItemDescription(iceDamage, "Daño helado");
         AddItemDescription(lightingDamage, "Daño eléctrico");

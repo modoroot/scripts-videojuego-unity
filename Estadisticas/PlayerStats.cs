@@ -32,12 +32,9 @@ public class PlayerStats : CharacterStats {
     }
 
     public override void OnEvasion() {
-        player.Skill.Dodge.CreateMirageOnDodge();
     }
 
     public void CloneDoDamage(CharacterStats _targetStats, float _multiplier) {
-        if (TargetCanAvoidAttack(_targetStats))
-            return;
 
         int totalDamage = damage.GetValue() + strength.GetValue();
 

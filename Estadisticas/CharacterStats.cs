@@ -4,16 +4,12 @@ using UnityEngine;
 
 public enum StatType {
     strength,
-    agility,
-    intelligence,
     vitality,
     damage,
     critChance,
     critPower,
     health,
     armor,
-    evasion,
-    magicRes,
     fireDamage,
     iceDamage,
     lightingDamage
@@ -24,20 +20,16 @@ public class CharacterStats : MonoBehaviour {
 
     [Header("Estadísticas principales")]
     public Stat strength;
-    public Stat agility;
-    public Stat intelligence;
     public Stat vitality;
 
     [Header("Estadísticas ofensivas")]
     public Stat damage;
     public Stat critChance;
-    public Stat critPower; // 150% pred
+    public Stat critPower;
 
     [Header("Estadísticas defensivas")]
     public Stat maxHealth;
     public Stat armor;
-    public Stat evasion;
-    public Stat magicResistance;
 
     [Header("Estadísticas mágicas")]
     public Stat fireDamage;
@@ -121,8 +113,6 @@ public class CharacterStats : MonoBehaviour {
 
 
     public virtual void DoDamage(CharacterStats _targetStats) {
-        if (TargetCanAvoidAttack(_targetStats))
-            return;
         _targetStats.GetComponent<Entity>().SetupKnockbackDirection(transform);
         int totalDamage = damage.GetValue() + strength.GetValue();
         if (CanCrit()) {
@@ -141,19 +131,11 @@ public class CharacterStats : MonoBehaviour {
         int _iceDamage = iceDamage.GetValue();
         int _lightingDamage = lightingDamage.GetValue();
 
-
-
-        int totalMagicalDamage = _fireDamage + _iceDamage + _lightingDamage + intelligence.GetValue();
-
-        totalMagicalDamage = CheckTargetResistance(_targetStats, totalMagicalDamage);
+        int totalMagicalDamage = _fireDamage + _iceDamage + _lightingDamage;
         _targetStats.TakeDamage(totalMagicalDamage);
-
-
         if (Mathf.Max(_fireDamage, _iceDamage, _lightingDamage) <= 0)
             return;
-
         AttemptToApplyAilments(_targetStats, _fireDamage, _iceDamage, _lightingDamage);
-
     }
 
     private void AttemptToApplyAilments(CharacterStats _targetStats, int _fireDamage, int _iceDamage, int _lightingDamage) {
@@ -337,33 +319,12 @@ public class CharacterStats : MonoBehaviour {
         return totalDamage;
     }
 
-
-    private int CheckTargetResistance(CharacterStats _targetStats, int totalMagicalDamage) {
-        totalMagicalDamage -= _targetStats.magicResistance.GetValue() + (_targetStats.intelligence.GetValue() * 3);
-        totalMagicalDamage = Mathf.Clamp(totalMagicalDamage, 0, int.MaxValue);
-        return totalMagicalDamage;
-    }
-
     public virtual void OnEvasion() {
 
     }
 
-    protected bool TargetCanAvoidAttack(CharacterStats _targetStats) {
-        int totalEvasion = _targetStats.evasion.GetValue() + _targetStats.agility.GetValue();
-
-        if (isShocked)
-            totalEvasion += 20;
-
-        if (Random.Range(0, 100) < totalEvasion) {
-            _targetStats.OnEvasion();
-            return true;
-        }
-
-        return false;
-    }
-
     protected bool CanCrit() {
-        int totalCriticalChance = critChance.GetValue() + agility.GetValue();
+        int totalCriticalChance = critChance.GetValue();
 
         if (Random.Range(0, 100) <= totalCriticalChance) {
             Debug.Log("CRIT");
@@ -389,16 +350,12 @@ public class CharacterStats : MonoBehaviour {
 
     public Stat GetStat(StatType _statType) {
         if (_statType == StatType.strength) return strength;
-        else if (_statType == StatType.agility) return agility;
-        else if (_statType == StatType.intelligence) return intelligence;
         else if (_statType == StatType.vitality) return vitality;
         else if (_statType == StatType.damage) return damage;
         else if (_statType == StatType.critChance) return critChance;
         else if (_statType == StatType.critPower) return critPower;
         else if (_statType == StatType.health) return maxHealth;
         else if (_statType == StatType.armor) return armor;
-        else if (_statType == StatType.evasion) return evasion;
-        else if (_statType == StatType.magicRes) return magicResistance;
         else if (_statType == StatType.fireDamage) return fireDamage;
         else if (_statType == StatType.iceDamage) return iceDamage;
         else if (_statType == StatType.lightingDamage) return lightingDamage;

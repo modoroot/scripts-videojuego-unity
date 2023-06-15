@@ -46,13 +46,7 @@ public class UI_StatSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 statValueText.text = (playerStats.critPower.GetValue() + playerStats.strength.GetValue()).ToString();
 
             if (statType == StatType.critChance)
-                statValueText.text = (playerStats.critChance.GetValue() + playerStats.agility.GetValue()).ToString();
-
-            if (statType == StatType.evasion)
-                statValueText.text = (playerStats.evasion.GetValue() + playerStats.agility.GetValue()).ToString();
-
-            if (statType == StatType.magicRes)
-                statValueText.text = (playerStats.magicResistance.GetValue() + (playerStats.intelligence.GetValue() * 3)).ToString();
+                statValueText.text = (playerStats.critChance.GetValue()).ToString();
         }
     }
 
