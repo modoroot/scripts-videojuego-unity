@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Estado general del jugador cuando está en el suelo. Sus características son:
+/// Permite al jugador utilizar todas sus habilidades, ataques y movimientos.
+/// </summary>
 public class PlayerGroundedState : PlayerState {
     public PlayerGroundedState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName) {
     }

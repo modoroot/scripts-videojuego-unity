@@ -134,7 +134,7 @@ public class CharacterStats : MonoBehaviour {
 
     }
 
-    #region Magical dmg and ailments
+    #region Daño mágico y debuffos
 
     public virtual void DoMagicalDamage(CharacterStats _targetStats) {
         int _fireDamage = fireDamage.GetValue();
@@ -366,6 +366,7 @@ public class CharacterStats : MonoBehaviour {
         int totalCriticalChance = critChance.GetValue() + agility.GetValue();
 
         if (Random.Range(0, 100) <= totalCriticalChance) {
+            Debug.Log("CRIT");
             return true;
         }
 

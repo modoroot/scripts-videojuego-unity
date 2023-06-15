@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Estado que controla el deslizamiento del jugador por una pared. Sus características son:
+/// Controla la velocidad a la que se desliza el jugador.
+/// Cambia de estado a PlayerWallJumpState si se pulsa la tecla de salto.
+/// </summary>
 public class PlayerWallSlideState : PlayerState {
     public PlayerWallSlideState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName) {
     }

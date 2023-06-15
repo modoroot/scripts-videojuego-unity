@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Clase que controla la entrada y salida de los estados del jugador.
+/// </summary>
 public class PlayerStateMachine {
     public PlayerState CurrentState { get; private set; }
 

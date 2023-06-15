@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Estado general del jugador. Define las características comunes de todos los estados
+/// como la entrada del usuario, el tiempo de estado, control de 
+/// las animaciones de cada estado, etc.
+/// </summary>
 public class PlayerState {
     protected PlayerStateMachine stateMachine;
     protected Player player;

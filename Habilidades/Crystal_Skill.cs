@@ -81,7 +81,7 @@ public class Crystal_Skill : Skill {
             canUseMultiStacks = true;
     }
 
-    #endregion     // here we unlock crystal skills
+    #endregion
 
     public override void UseSkill() {
         base.UseSkill();

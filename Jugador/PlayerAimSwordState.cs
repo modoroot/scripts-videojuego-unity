@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Estado que apunta con la espada, una de las habilidades del jugador. Sus características son:
+/// Al momento de apuntar, se crean unos puntos en pantalla con la trayectoria de la espada.
+/// El jugador entra en estado ocupado para que no pueda moverse mientras apunta.
+/// Se ajusta su velocidad a 0 para que no se mueva.
+/// Se cambia el sentido del personaje dependiendo de la posición del mouse.
+/// </summary>
 public class PlayerAimSwordState : PlayerState {
     public PlayerAimSwordState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName) {
     }

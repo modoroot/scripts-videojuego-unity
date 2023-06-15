@@ -100,9 +100,9 @@ public class Entity : MonoBehaviour {
         Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
     }
     #endregion
-    #region Flip
+    #region Giro
     public virtual void Flip() {
-        FacingDir = FacingDir * -1;
+        FacingDir *= -1;
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
 

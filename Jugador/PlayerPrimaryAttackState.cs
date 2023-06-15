@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
+/// <summary>
+/// Clase que define el estado de ataque principal del jugador. Sus características son:
+/// Contiene un contador de combos que se incrementa cada vez que se llama a este estado.
+/// Hace un ataque diferente dependiendo del valor del contador de combos.
+/// </summary>
 public class PlayerPrimaryAttackState : PlayerState {
 
     public int ComboCounter { get; private set; }
@@ -16,7 +21,7 @@ public class PlayerPrimaryAttackState : PlayerState {
     public override void Enter() {
         base.Enter();
 
-        xInput = 0;  // we need this to fix bug on attack direction
+        xInput = 0;
 
         if (ComboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow)
             ComboCounter = 0;

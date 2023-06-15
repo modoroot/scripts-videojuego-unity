@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+/// <summary>
+/// Clase que contiene todas las propiedades del jugador y controla su comportamiento
+/// a partir de los estados que se le asignan.
+/// </summary>
 public class Player : Entity {
     [Header("Attack details")]
     public Vector2[] attackMovement;

@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour, ISaveManager {
         _data.checkpoints.Clear();
         foreach (Checkpoint checkpoint in checkpoints) {
             _data.checkpoints.Add(checkpoint.id, checkpoint.isActivated);
-            Debug.Log("GUARDANDO AL HIJO DE LA GRAN PUTA " + checkpoint.id + " COMO " + checkpoint.isActivated);
+            //Debug.Log("GUARDANDO " + checkpoint.id + " COMO " + checkpoint.isActivated);
         }
     }
 
@@ -121,7 +121,6 @@ public class GameManager : MonoBehaviour, ISaveManager {
         if (_pause)
             Time.timeScale = 0;
         else
-            Time.timeScale = 1;
-        
+            Time.timeScale = 1;   
     }
 }
