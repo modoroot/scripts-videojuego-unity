@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// 
+/// Clase que admnistra el reinicio de la escena y el guardado de datos de los checkpoints y las
+/// almas perdidas. También se encarga de pausar el juego.
 /// </summary>
 public class GameManager : MonoBehaviour, ISaveManager {
 

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 
+/// Clase que se encarga de administrar las almas del jugador.
+/// También crea un singleton para acceder a la instancia desde cualquier script.
 /// </summary>
 public class PlayerManager : MonoBehaviour, ISaveManager {
     public static PlayerManager instance;

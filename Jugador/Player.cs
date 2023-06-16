@@ -33,7 +33,6 @@ public class Player : Entity {
 
     #region Estados
     public PlayerStateMachine StateMachine { get; private set; }
-
     public PlayerIdleState IdleState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }

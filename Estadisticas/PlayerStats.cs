@@ -31,9 +31,6 @@ public class PlayerStats : CharacterStats {
             currentArmor.Effect(player.transform);
     }
 
-    public override void OnEvasion() {
-    }
-
     public void CloneDoDamage(CharacterStats _targetStats, float _multiplier) {
 
         int totalDamage = damage.GetValue() + strength.GetValue();

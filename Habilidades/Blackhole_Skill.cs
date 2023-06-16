@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Blackhole_Skill : Skill {
 
-
     [SerializeField] private UI_SkillTreeSlot blackHoleUnlockButton;
     public bool blackholeUnlocked;
     [SerializeField] private int amountOfAttacks;
@@ -15,11 +14,7 @@ public class Blackhole_Skill : Skill {
     [SerializeField] private float maxSize;
     [SerializeField] private float growSpeed;
     [SerializeField] private float shrinkSpeed;
-
-
     Blackhole_Skill_Controller currentBlackhole;
-
-
 
     private void UnlockBlackhole() {
         if (blackHoleUnlockButton.unlocked)
@@ -50,18 +45,14 @@ public class Blackhole_Skill : Skill {
         base.Update();
     }
 
-
     public bool SkillCompleted() {
         if (!currentBlackhole)
             return false;
-
 
         if (currentBlackhole.PlayerCanExitState) {
             currentBlackhole = null;
             return true;
         }
-
-
         return false;
     }
 

@@ -72,7 +72,6 @@ public class UI : MonoBehaviour {
             CheckForInGameUI();
             return;
         }
-
         SwitchTo(_menu);
     }
 
@@ -81,7 +80,6 @@ public class UI : MonoBehaviour {
             if (transform.GetChild(i).gameObject.activeSelf && transform.GetChild(i).GetComponent<UI_FadeScreen>() == null)
                 return;
         }
-
         SwitchTo(inGameUI);
     }
 

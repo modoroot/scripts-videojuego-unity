@@ -313,14 +313,8 @@ public class CharacterStats : MonoBehaviour {
             totalDamage -= Mathf.RoundToInt(_targetStats.armor.GetValue() * .8f);
         else
             totalDamage -= _targetStats.armor.GetValue();
-
-
         totalDamage = Mathf.Clamp(totalDamage, 0, int.MaxValue);
         return totalDamage;
-    }
-
-    public virtual void OnEvasion() {
-
     }
 
     protected bool CanCrit() {
